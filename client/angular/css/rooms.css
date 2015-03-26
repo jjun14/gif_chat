@@ -1,0 +1,28 @@
+div.rooms{
+  margin-top: 10px;
+  border: 1px solid silver;
+  padding: 0px 20px 20px 20px;
+  border-radius: 7px;
+}
+div.room{
+  border: 1px solid silver;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+div.info{
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px;
+}
+div.info p{
+  margin: 0px;
+}
+
+div.info p span{
+  font-weight: bold;
+}
+
+.join {
+  display: inline-block;
+  margin: 20px 15px 0px 0px;
+}

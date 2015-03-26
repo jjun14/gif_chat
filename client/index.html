@@ -1,0 +1,28 @@
+<!doctype html>
+  <html ng-app='gifChat'>
+    <head>
+      <title></title>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js" type="text/javascript" charset="utf-8"></script>
+      <script type='text/javascript' src='/socket.io/socket.io.js'></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-css/1.0.7/angular-css.js"></script>
+      <script src="https://www.webrtc-experiment.com/gif-recorder.js"></script>
+      <script src="http://RecordRTC.org/latest.js"></script>
+      <script src="./angular/js/dependencies/canvas-toBlob.js"></script>
+      <script src="./angular/js/app.js"></script>
+      <script src="./angular/js/angular_routes.js"></script>
+      <script src='/angular/factories/user-factory.js'></script>
+      <script src='/angular/factories/room-factory.js'></script>
+      <script src="./angular/controllers/chats-controller.js"></script>
+      <script src='./angular/controllers/users-controller.js'></script>
+      <script src='./angular/controllers/rooms-controller.js'></script>
+      <link rel="stylesheet" href="./angular/css/app.css">
+    </head>
+    <body ng-view=''>
+    </body>
+</html>

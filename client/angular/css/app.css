@@ -1,0 +1,57 @@
+/*.wrapper{
+  width: 300px;
+  margin-top: 50%;
+  border: 2px solid black; 
+  text-align: center;
+  padding: 0px 20px 20px 20px;    
+}
+
+input{
+  margin-bottom: 10px;
+}*/
+
+/*** Rooms Partial ***/
+
+/*div.rooms{
+  margin-top: 10px;
+  border: 1px solid black;
+  padding: 0px 20px 20px 20px;
+}
+div.room{
+  border: 1px solid black;
+  margin-bottom: 15px;
+}
+div.info{
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px;
+}
+div.info p{
+  margin: 0px;
+}
+
+div.info p span{
+  font-weight: bold;
+}
+.join{
+  margin: 13px 10px 0px 0px;
+}*/
+
+/***  Chat Partial  ***/
+/*div.videofeed{
+  background-color: black;
+}
+
+div.videofeed div p {
+  color: white;
+}
+
+div#editor{
+  margin:0px;
+  border: 2px solid black;
+  height: 100vh;
+}
+
+video{
+  height: 200px;
+}*/

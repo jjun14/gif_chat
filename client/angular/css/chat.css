@@ -1,0 +1,124 @@
+#chats {
+  
+  border-left: 1px solid silver;
+  border-top: 1px solid silver;  
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  border-right: 1px solid silver;
+  height: 250px;
+  padding: 10px;
+  overflow: scroll;
+}
+
+span {
+  font-weight: bold;
+}
+
+div#chats p.notice {
+  color: #4287ff;
+  font-size: 10px;
+}
+
+.options {
+  height: 25px;
+  border-left: 1px solid silver;
+  border-top: 1px solid silver;
+  border-right: 1px solid silver;
+  text-align: center;
+  padding-top: 3px;
+}
+
+div.forms {
+  border: 1px solid silver;
+  padding: 15px;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+div.forms h4{
+  margin: 0px 0px 15px 0px;
+}
+
+h5 {
+  vertical-align: top;
+  margin: 0px;
+}
+
+#message_form {
+  height: 80px;
+}
+
+div.preview-section{
+  display: inline-block;
+  padding: 0px 0px 0px 20px;
+}
+
+video#gif_preview, img#photo_preview, video#camera_preview {
+  display: block;
+  height: 150px;
+  width: 150px;
+  background-color: gray;
+  margin-bottom: 10px;
+}
+
+div.gif, div.picture {
+  position: relative;
+}
+
+div.gif {
+  display: inline-block;
+}
+
+div.picture, div.camera {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.gif video {
+  position: relative;
+  z-index: 0;
+}
+
+div.gif .overlay, div.picture .overlay {
+  position: absolute;
+  height: 150px;
+  width: 150px;
+  text-align: center;
+  top: 0;
+  left: 0;
+  color: white;
+}
+
+div.placeholder-div {
+  background-color: gray;
+  height: 150px;
+  width: 150px;
+  z-index: 5;
+}
+
+#canvas {
+  height: 100px;
+  width: 100px;
+  display: none;
+}
+
+.icon {
+  height: 20px;
+  width: 20px;
+}
+
+.leave {
+  margin-top: 8px;
+}
+
+#buttons {
+  vertical-align: top;
+  display: inline-block;
+  width: 150px;
+}
+
+#buttons button {
+  margin: 0px 0px 10px 10px;
+}
+
+
