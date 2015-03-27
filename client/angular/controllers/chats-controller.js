@@ -34,8 +34,15 @@ gifChat.controller('ChatsController', function($scope, $location, UserFactory, R
     socket.emit('get_messages', {room_key: $scope.room_key});
   }
 
+  function removeListeners(){
+    socket.removeListener('new_user');
+    socket.removeListener('show_messages');
+    socket.removeListener('update_messages');
+  }
+
   $scope.logout = function(){
     socket.emit('logout', {user: $scope.current_user, room_key: $scope.room_key});
+    removeListeners();
     UserFactory.logout(function(){
       $scope.current_user = {}
     });
@@ -44,6 +51,7 @@ gifChat.controller('ChatsController', function($scope, $location, UserFactory, R
 
   $scope.leave_room = function(){
     socket.emit('leave_room', {user: $scope.current_user, room_key: $scope.room_key});
+    removeListeners();
     $location.path('/rooms');
   }
 
@@ -169,7 +177,7 @@ gifChat.controller('ChatsController', function($scope, $location, UserFactory, R
         var img_src = canvas.toDataURL();
         $('#chats').append("<p><span>"+current_user.first_name+" "+current_user.last_name+":</span> </p>");
         $('#chats').append("<img src="+img_src+">");
-        $('#chats').animate({scrollTop: $('#chats').height()}, 1600, 'easeOutSine');
+        // $('#chats').animate({scrollTop: $('#chats').height()}, 1600, 'easeOutSine');
 
         socket.emit('new_photo', {room_key: $scope.room_key, user: current_user.first_name+" "+current_user.last_name, content: img_src})
 
@@ -188,7 +196,7 @@ gifChat.controller('ChatsController', function($scope, $location, UserFactory, R
     if(message != ""){
       socket.emit('new_message', {room_key: $scope.room_key,user: current_user.first_name+" "+current_user.last_name, content: message});
       $('#chats').append("<p><span>"+current_user.first_name+" "+current_user.last_name+": </span> "+message+"</p>");
-      $('#chats').animate({scrollTop: $('#chats').height()}, 1600, 'easeOutSine');
+      // $('#chats').animate({scrollTop: $('#chats').height()}, 1600, 'easeOutSine');
     }
   }
 
@@ -214,7 +222,7 @@ gifChat.controller('ChatsController', function($scope, $location, UserFactory, R
         }
       }
     }
-    $('#chats').animate({scrollTop: $('#chats').height()}, 1600, 'easeOutSine');
+    // $('#chats').animate({scrollTop: $('#chats').height()}, 1600, 'easeOutSine');
   })
 
   socket.on('update_messages', function(data){
@@ -234,6 +242,6 @@ gifChat.controller('ChatsController', function($scope, $location, UserFactory, R
       $('#chats').append("<p><span>"+data.user+":</span></p>");
       $('#chats').append("<video autoplay loop src="+data.content+"></video>");
     }
-    $('#chats').animate({scrollTop: $('#chats').height()}, 1600, 'easeOutSine');
+    // $('#chats').animate({scrollTop: $('#chats').height()}, 1600, 'easeOutSine');
   })
 })
