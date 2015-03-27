@@ -45,7 +45,7 @@ module.exports = (function(){
             res.send(JSON.stringify(results));
           }
           else {
-            console.log('could not find user!f');
+            console.log('could not find user!');
           }
         }
       })

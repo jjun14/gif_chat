@@ -1,18 +1,25 @@
+#create_button {
+  margin-bottom: 15px;
+}
+
 div.rooms{
+  height: 78vh;
   margin-top: 10px;
   border: 1px solid silver;
-  padding: 0px 20px 20px 20px;
+  padding: 20px 20px 20px 20px;
   border-radius: 7px;
 }
+
 div.room{
   border: 1px solid silver;
   border-radius: 5px;
-  margin-bottom: 15px;
 }
+
 div.info{
   display: inline-block;
   vertical-align: top;
-  padding: 10px;
+  /*padding: 10px;*/
+  /*margin: 10px 0px 0px 10px;*/
 }
 div.info p{
   margin: 0px;
@@ -23,6 +30,10 @@ div.info p span{
 }
 
 .join {
-  display: inline-block;
-  margin: 20px 15px 0px 0px;
+  /*display: inline-block;*/
+  margin-top: 10px;
+}
+
+.room_row {
+  padding: 10px;
 }

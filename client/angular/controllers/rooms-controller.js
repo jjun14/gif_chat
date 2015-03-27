@@ -28,13 +28,12 @@ gifChat.controller('RoomsController', function($scope, $location, UserFactory, R
 
   $scope.createRoom = function(host, room){
     var new_room = {};
-    new_room.host = {_id: host._id, first_name: host.first_name, last_name: host.last_name};
+    new_room.host = {id: socket.id, first_name: host.first_name, last_name: host.last_name, created_at: host.created_at};
     new_room.name = room.name
     new_room.users = [];
     new_room.created_at = new Date();
     console.log('CLIENT CREATE ROOM', new_room);
     socket.emit('createRoom', new_room);
-    new_room = {};
   }
 
   $scope.joinRoom = function(room_key, user){
@@ -46,7 +45,7 @@ gifChat.controller('RoomsController', function($scope, $location, UserFactory, R
   socket.on('updateRoomList', function(data){
     var key = Object.keys(data)[0];
     $scope.$apply(function(){
-      $scope.rooms[key] = data[key];   
+      $scope.rooms[key] = data[key];
     })
   })
 

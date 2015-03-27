@@ -1,6 +1,7 @@
 gifChat.controller('ChatsController', function($scope, $location, UserFactory, RoomFactory){
   getCurrentUser();
   getCurrentRoom();
+  getMessages();
 
   // (function(){
   //   if(JSON.stringify($scope.current_user) == '{}'){
@@ -25,15 +26,25 @@ gifChat.controller('ChatsController', function($scope, $location, UserFactory, R
     RoomFactory.getCurrentRoom(function(response){
       $scope.current_room = response;
       $scope.room_key = Object.keys(response)[0];
-      console.log("CURRENT ROOM\n\n", $scope.current_room);
+      // console.log("CURRENT ROOM\n\n", $scope.current_room);
     })
   }
 
+  function getMessages(){
+    socket.emit('get_messages', {room_key: $scope.room_key});
+  }
+
   $scope.logout = function(){
+    socket.emit('logout', {user: $scope.current_user, room_key: $scope.room_key});
     UserFactory.logout(function(){
       $scope.current_user = {}
     });
     $location.path('/index');
+  }
+
+  $scope.leave_room = function(){
+    socket.emit('leave_room', {user: $scope.current_user, room_key: $scope.room_key});
+    $location.path('/rooms');
   }
 
   $scope.changePartial = function(type){
@@ -105,6 +116,7 @@ gifChat.controller('ChatsController', function($scope, $location, UserFactory, R
       reader.readAsDataURL(gif_blob);
       $('#chats').append("<p><span>"+current_user.first_name+" "+current_user.last_name+":</span> </p>");
       $('#chats').append("<video autoplay loop src="+gif_url+"></video>");
+      $('#chats').animate({scrollTop: $('#chats').height()}, 1600, 'easeOutSine');
       reader.onloadend = function(){
         base64data = reader.result;
         // console.log(base64data);
@@ -155,8 +167,9 @@ gifChat.controller('ChatsController', function($scope, $location, UserFactory, R
         // console.log('sending picture!');
         var canvas = document.getElementById('canvas');
         var img_src = canvas.toDataURL();
-        $('#chats').append("<p></span>"+current_user.first_name+" "+current_user.last_name+":<span> </p>");
+        $('#chats').append("<p><span>"+current_user.first_name+" "+current_user.last_name+":</span> </p>");
         $('#chats').append("<img src="+img_src+">");
+        $('#chats').animate({scrollTop: $('#chats').height()}, 1600, 'easeOutSine');
 
         socket.emit('new_photo', {room_key: $scope.room_key, user: current_user.first_name+" "+current_user.last_name, content: img_src})
 
@@ -175,22 +188,42 @@ gifChat.controller('ChatsController', function($scope, $location, UserFactory, R
     if(message != ""){
       socket.emit('new_message', {room_key: $scope.room_key,user: current_user.first_name+" "+current_user.last_name, content: message});
       $('#chats').append("<p><span>"+current_user.first_name+" "+current_user.last_name+": </span> "+message+"</p>");
+      $('#chats').animate({scrollTop: $('#chats').height()}, 1600, 'easeOutSine');
     }
   }
 
   //listen for join_room when a new user joins the chat
-  socket.on('join_room', function(data){
-    $('#chats').append("<p class='notice'>"+data.user+" joined the chat</p>");
+  socket.on('new_user', function(data){
+    $('#chats').append(data.content);
   })
 
+
   socket.on('show_messages', function(data){
-    console.log('UPDATING MESSAGES!');
+    if($('#chats').empty()){
+      for(var i=0; i < data.messages.length; i++){
+        if(data.messages[i].message_type == 'notice'){
+          $('#chats').append(data.messages[i].content);
+        } else if(data.messages[i].message_type == 'text'){
+          $('#chats').append("<p><span>"+data.messages[i].user+": </span>"+data.messages[i].content+"</p>");
+        } else if(data.messages[i].message_type == 'photo'){
+          $('#chats').append("<p><span>"+data.messages[i].user+":</span> </p>");
+          $('#chats').append("<img src="+data.messages[i].content+">");
+        } else if(data.messages[i].message_type == 'gif'){
+          $('#chats').append("<p><span>"+data.messages[i].user+":</span> </p>");
+          $('#chats').append("<video autoplay loop src="+data.messages[i].content+"></video>");
+        }
+      }
+    }
+    $('#chats').animate({scrollTop: $('#chats').height()}, 1600, 'easeOutSine');
   })
 
   socket.on('update_messages', function(data){
-    // console.log('UPDATING');
+    console.log('UPDATING');
     // console.log(data);
-    if(data.message_type == 'text'){
+    if(data.message_type == 'notice'){
+      $('#chats').append(data.content);
+    }
+    else if(data.message_type == 'text'){
       $('#chats').append("<p><span>"+data.user+": </span>"+data.content+"</p>");
     } else if(data.message_type == 'photo'){
       $('#chats').append("<p><span>"+data.user+":</span> </p>");
@@ -198,8 +231,9 @@ gifChat.controller('ChatsController', function($scope, $location, UserFactory, R
     } else if(data.message_type == 'gif'){
       // console.log('here');
       // console.log(data.content);
-      $('#chats').append("<p><span>"+data.user+":</span> </p>");
+      $('#chats').append("<p><span>"+data.user+":</span></p>");
       $('#chats').append("<video autoplay loop src="+data.content+"></video>");
     }
+    $('#chats').animate({scrollTop: $('#chats').height()}, 1600, 'easeOutSine');
   })
 })

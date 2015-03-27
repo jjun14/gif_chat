@@ -1,5 +1,4 @@
 #chats {
-  
   border-left: 1px solid silver;
   border-top: 1px solid silver;  
   border-top-left-radius: 7px;
@@ -16,7 +15,7 @@ span {
 
 div#chats p.notice {
   color: #4287ff;
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .options {
