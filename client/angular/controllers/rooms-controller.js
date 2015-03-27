@@ -3,11 +3,11 @@ gifChat.controller('RoomsController', function($scope, $location, UserFactory, R
   getCurrentUser();
   loggedIn();
 
-  // (function(){
-  //   if(JSON.stringify($scope.current_user) == '{}'){
-  //     $location.path('/');
-  //   }
-  // }())
+  (function(){
+    if(JSON.stringify($scope.current_user) == '{}'){
+      $location.path('/');
+    }
+  }())
 
   function getCurrentUser(){
     UserFactory.currentUser(function(response){
